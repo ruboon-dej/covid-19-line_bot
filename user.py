@@ -28,7 +28,7 @@ class User:
         self.page = 0
     
     def handle_overall(self):
-        x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
+        x = requests.get('https://covid19.th-stat.com/th/apim')
         y = ""
         for info in OVERALL_THINGS:
             y += "{}: {}\n".format(info, x.json()[info])
@@ -60,7 +60,7 @@ class User:
         if len(provinces) == PAGE_SIZE:
             items.append(QuickReplyButton(action=MessageAction(label="Next", text="next")))
 
-        return TextSendMessage(text="Please select the second choice",
+        return TextSendMessage(text="Please select the information that you want to know.",
             quick_reply=QuickReply(items=items))
     
     def get_response(self, text):
