@@ -74,7 +74,7 @@ class User:
             elif text == "provinces":
                 self.first_choice = text
                 return self.handle_province(text)
-            elif text == "I'm scared":
+            elif text == "I am scared":
                 return self.handle_easteregg(text)
             else:
                 return FIRST_PROMPT
