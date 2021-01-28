@@ -23,3 +23,9 @@ y = ""
 for info in OVERALL_THINGS:
     y += "{}: {}\n".format(info, x.json()[info])
 print (y)
+
+def return_f(text):
+    if text == "I'm scared":
+        print ("Don't be bro. ;-)")
+
+text = return_f(input())
