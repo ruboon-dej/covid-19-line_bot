@@ -57,7 +57,8 @@ class User:
         if self.first_choice is None:
             if text == "overall":
                 return self.handle_overall()
-            elif text == "region":
+            elif text == "provinces":
+                self.first_choice = text
                 return self.handle_province(text)
             else:
                 return FIRST_PROMPT
