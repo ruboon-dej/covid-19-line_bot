@@ -35,7 +35,9 @@ class User:
         return TextSendMessage(text="Number of cases: {}".format(result))
 
     def handle_province(self, text):
-        if text == "next":
+        provinces = get_provinces(self.page, PAGE_SIZE)
+
+        if text == "next" and len(provinces) == PAGE_SIZE:
             self.page += 1
         elif text == "back" and self.page != 0:
             self.page -= 1
@@ -45,12 +47,13 @@ class User:
         items = []
         if self.page != 0:
             items.append(QuickReplyButton(action=MessageAction(label="Back", text="back")))
-        for province in get_provinces(self.page, PAGE_SIZE):
+        for province in provinces:
             label = province
             if len(province) > 20 :
                 label = "{}...".format(province[0:17])
             items.append(QuickReplyButton(action=MessageAction(label=label, text=province)))
-        items.append(QuickReplyButton(action=MessageAction(label="Next", text="next")))
+        if len(provinces) == PAGE_SIZE:
+            items.append(QuickReplyButton(action=MessageAction(label="Next", text="next")))
 
         return TextSendMessage(text="Please select the second choice",
             quick_reply=QuickReply(items=items))
