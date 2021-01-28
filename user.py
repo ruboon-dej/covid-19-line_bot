@@ -65,7 +65,7 @@ class User:
         
     def handle_easteregg(self):
         y = "Don't be bro. ;-)"
-        return TextSendMessage(text=y[:-1])
+        return TextSendMessage(text=y)
     
     def get_response(self, text):
         if self.first_choice is None:
