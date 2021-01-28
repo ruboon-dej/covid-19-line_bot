@@ -32,7 +32,7 @@ class User:
         y = ""
         for info in OVERALL_THINGS:
             y += "{}: {}\n".format(info, x.json()[info])
-        return TextSendMessage(text=y)
+        return TextSendMessage(text=y[:-1])
 
     def get_province_result(self, text):
         self.reset()
