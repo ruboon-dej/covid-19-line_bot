@@ -15,6 +15,7 @@ FIRST_PROMPT = TextSendMessage(text="Please select the second choice",
     ]))
 
 VALID_FIRST_CHOICE = ["overall", "provinces"]
+OVERALL_THINGS = ["Confirmed","Recovered","Hospitalized","Deaths","NewConfirmed","NewRecovered","NewHospitalized","NewDeaths"]
 
 class User:
     def __init__(self):
@@ -27,7 +28,11 @@ class User:
         self.page = 0
     
     def handle_overall(self):
-        pass
+        x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
+        y = ""
+        for info in OVERALL_THINGS:
+            y += "{}: {}\n".format(info, x.json()[info])
+        return TextSendMessage(text=y)
 
     def get_province_result(self, text):
         self.reset()
@@ -59,7 +64,6 @@ class User:
             quick_reply=QuickReply(items=items))
     
     def get_response(self, text):
-        x = requests.get('https://covid19.th-stat.com/api/open/today')
         if self.first_choice is None:
             if text == "overall":
                 return self.handle_overall()
@@ -70,9 +74,3 @@ class User:
                 return FIRST_PROMPT
         else:
             return self.handle_province(text)
-
-            
-
-
-    def overall_cases():
-        pass
