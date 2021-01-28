@@ -40,13 +40,16 @@ class User:
         elif text == "back" and self.page != 0:
             self.page -= 1
         elif text in PROVINCES:
-            return get_province_result(text)
+            return self.get_province_result(text)
         
         items = []
         if self.page != 0:
             items.append(QuickReplyButton(action=MessageAction(label="Back", text="back")))
         for province in get_provinces(self.page, PAGE_SIZE):
-            items.append(QuickReplyButton(action=MessageAction(label=province[0:20], text=province)))
+            label = province
+            if len(province) > 20 :
+                label = "{}...".format(province[0:17])
+            items.append(QuickReplyButton(action=MessageAction(label=label, text=province)))
         items.append(QuickReplyButton(action=MessageAction(label="Next", text="next")))
 
         return TextSendMessage(text="Please select the second choice",
