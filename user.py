@@ -70,6 +70,8 @@ class User:
             elif text == "provinces":
                 self.first_choice = text
                 return self.handle_province(text)
+            elif text == "I'm scared":
+                return TextSendMessage(text="Don't be bro. ;-)")
             else:
                 return FIRST_PROMPT
         else:
