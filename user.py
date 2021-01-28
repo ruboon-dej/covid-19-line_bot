@@ -46,7 +46,7 @@ class User:
         if self.page != 0:
             items.append(QuickReplyButton(action=MessageAction(label="Back", text="back")))
         for province in get_provinces(self.page, PAGE_SIZE):
-            items.append(QuickReplyButton(action=MessageAction(label=province, text=province)))
+            items.append(QuickReplyButton(action=MessageAction(label=province[0:20], text=province)))
         items.append(QuickReplyButton(action=MessageAction(label="Next", text="next")))
 
         return TextSendMessage(text="Please select the second choice",
