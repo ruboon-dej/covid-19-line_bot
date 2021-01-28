@@ -62,10 +62,6 @@ class User:
 
         return TextSendMessage(text="Please select province.",
             quick_reply=QuickReply(items=items))
-        
-    def handle_easteregg(self):
-        y = "Don't be bro. ;-)"
-        return TextSendMessage(text=y)
     
     def get_response(self, text):
         if self.first_choice is None:
@@ -75,7 +71,7 @@ class User:
                 self.first_choice = text
                 return self.handle_province(text)
             elif text == "I am scared":
-                return self.handle_easteregg(text)
+                return TextSendMessage(text=y)
             else:
                 return FIRST_PROMPT
         else:
