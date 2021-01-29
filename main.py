@@ -14,7 +14,7 @@ class Data:
         return "Location: {}\nCases: {}\nDeaths: {}\nRecoveries: {}\n".format(self.name, self.cases, self.deaths, self.recoveries)
 
 
-def get_world_data(limit=20):
+def get_world_data(limit=5):
     soup = BeautifulSoup(res.content, 'html.parser')
     table = soup.select("#thetable")[0]
     world = table.find(class_="sorttop")
@@ -32,8 +32,4 @@ def get_world_data(limit=20):
     p = ""
     for d in data:
         p += str(d) + "\n"
-    return p
-
-d = get_world_data()
-print(d)
-print (len(d))
+    return TextSendMessage(text=p)
