@@ -1,6 +1,9 @@
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, QuickReply, QuickReplyButton, MessageAction
 )
+from bs4 import BeautifulSoup
+
+from main import get_world_data
 
 from province import get_provinces, PROVINCES, get_case_for_province
 
@@ -85,6 +88,8 @@ class User:
                 return TextSendMessage(text="https://covid19.th-stat.com/th/share/map")
             elif text == "Map":
                 return TextSendMessage(text="https://covid19.th-stat.com/th/share/map")
+            elif text == "Global" or text == "global":
+                return get_world_data()
             else:
                 return FIRST_PROMPT
         else:
