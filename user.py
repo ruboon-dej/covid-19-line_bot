@@ -81,6 +81,8 @@ class User:
                 return self.handle_when()
             elif text == "when":
                 return self.handle_when()
+            elif text == "map" or "Map":
+                return TextSendMessage(text="https://covid19.th-stat.com/th/share/map")
             else:
                 return FIRST_PROMPT
         else:
