@@ -39,6 +39,11 @@ class User:
         result = get_case_for_province(text)
         return TextSendMessage(text="Number of cases: {}".format(result))
 
+    def handle_when(self):
+        x = requests.get('https://covid19.th-stat.com/api/open/today')
+        y = x.json()["UpdateDate"]
+        return TextSendMessage(text=y) 
+
     def handle_province(self, text):
         provinces = get_provinces(self.page, PAGE_SIZE)
 
@@ -72,6 +77,8 @@ class User:
                 return self.handle_province(text)
             elif text == "I am scared":
                 return TextSendMessage(text="Don't be bro ;-)")
+            elif text == "when":
+                return self.handle_when()
             else:
                 return FIRST_PROMPT
         else:
