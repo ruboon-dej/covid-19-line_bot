@@ -77,7 +77,7 @@ class User:
                 return self.handle_province(text)
             elif text == "I am scared":
                 return TextSendMessage(text="Don't be bro ;-)")
-            elif text == "when":
+            elif text == "When":
                 return self.handle_when()
             else:
                 return FIRST_PROMPT
