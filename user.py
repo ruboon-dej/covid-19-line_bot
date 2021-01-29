@@ -89,7 +89,7 @@ class User:
             elif text == "Map":
                 return TextSendMessage(text="https://covid19.th-stat.com/th/share/map")
             elif text == "Global" or text == "global":
-                return get_world_data()
+                return TextSendMessage(text"No can't help you with that")
             else:
                 return FIRST_PROMPT
         else:
