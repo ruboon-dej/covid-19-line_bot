@@ -79,6 +79,8 @@ class User:
                 return TextSendMessage(text="Don't be bro ;-)")
             elif text == "When":
                 return self.handle_when()
+            elif text == "when":
+                return self.handle_when()
             else:
                 return FIRST_PROMPT
         else:
