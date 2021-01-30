@@ -53,7 +53,11 @@ class User:
         y = x.json()["LastData"]
         z = "Last provinces update is : " + str(y)
         return TextSendMessage(text=z)
-        
+    
+    def cancel(self):
+        self.reset
+        return TextSendMessage(text="Done")
+
     def handle_province(self, text):
         provinces = get_provinces(self.page, PAGE_SIZE)
 
@@ -99,6 +103,8 @@ class User:
                 return TextSendMessage(text="No can't help you with that")
             elif text == "Whenp" or text == "whenp":
                 return self.handle_whenp()
+            elif text == "Cancel" or text == "cancel":
+                return self.cancel()
             else:
                 return FIRST_PROMPT
         else:
