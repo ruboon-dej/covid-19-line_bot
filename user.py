@@ -67,6 +67,8 @@ class User:
             self.page -= 1
         elif text in PROVINCES:
             return self.get_province_result(text)
+        elif text == "Cancel" or text == "cancel":
+            return self.cancel()
         
         items = []
         if self.page != 0:
@@ -103,8 +105,6 @@ class User:
                 return TextSendMessage(text="No can't help you with that")
             elif text == "Whenp" or text == "whenp":
                 return self.handle_whenp()
-            elif text == "Cancel" or text == "cancel":
-                return self.cancel()
             else:
                 return FIRST_PROMPT
         else:
