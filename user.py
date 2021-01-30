@@ -45,8 +45,14 @@ class User:
     def handle_when(self):
         x = requests.get('https://covid19.th-stat.com/api/open/today')
         y = x.json()["UpdateDate"]
-        return TextSendMessage(text=y) 
+        z = "Last overall update is : " + str(y)
+        return TextSendMessage(text=z) 
 
+    def handle_whenp(self):
+        x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
+        y = x.json()["LastData"]
+        z = "Last provinces update is : " + str(y)
+        return TextSendMessage(text=z)
     def handle_province(self, text):
         provinces = get_provinces(self.page, PAGE_SIZE)
 
@@ -90,6 +96,8 @@ class User:
                 return TextSendMessage(text="https://covid19.th-stat.com/th/share/map")
             elif text == "Global" or text == "global":
                 return TextSendMessage(text="No can't help you with that")
+            elif text == "Whenp" or text == "whenp":
+                return self.handle_whenp()
             else:
                 return FIRST_PROMPT
         else:
