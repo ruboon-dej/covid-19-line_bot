@@ -53,6 +53,7 @@ class User:
         y = x.json()["LastData"]
         z = "Last provinces update is : " + str(y)
         return TextSendMessage(text=z)
+        
     def handle_province(self, text):
         provinces = get_provinces(self.page, PAGE_SIZE)
 
