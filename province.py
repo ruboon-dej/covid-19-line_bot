@@ -13,7 +13,7 @@ def get_case_for_province(province):
     return x.json()['Province'][province]
 
 
-def get_top_10():
+def get_top_10(limit=10):
     x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
     provinces = x.json()['Province']
     sorted_provinces = sorted(provinces.items(), key=lambda item: -item[1])[:limit]
