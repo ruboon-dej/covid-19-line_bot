@@ -5,8 +5,7 @@ from bs4 import BeautifulSoup
 
 from main import get_world_data
 
-from province import get_provinces, PROVINCES, get_case_for_province
-
+from province import get_provinces, PROVINCES, get_case_for_province, get_top_10
 import requests
 
 PAGE_SIZE = 10
@@ -14,7 +13,8 @@ PAGE_SIZE = 10
 FIRST_PROMPT = TextSendMessage(text="Please select the information that you want to know.",
     quick_reply=QuickReply(items=[
         QuickReplyButton(action=MessageAction(label="Overall", text="overall")),
-        QuickReplyButton(action=MessageAction(label="Provinces", text="provinces"))
+        QuickReplyButton(action=MessageAction(label="Provinces", text="provinces")),
+        QuickReplyButton(action=MessageAction(label="Top 10", text="top"))
     ]))
 
 VALID_FIRST_CHOICE = ["overall", "provinces"]
@@ -103,6 +103,8 @@ class User:
                 return TextSendMessage(text="No can't help you with that")
             elif text == "Whenp" or text == "whenp":
                 return self.handle_whenp()
+            elif text == "top":
+                return TextSendMessage(text=get_top_10())
             else:
                 return FIRST_PROMPT
         else:

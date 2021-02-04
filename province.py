@@ -11,3 +11,16 @@ def get_provinces(index, page_size):
 def get_case_for_province(province):
     x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
     return x.json()['Province'][province]
+
+
+def get_top_10():
+    x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
+    provinces = x.json()['Province']
+    sorted_provinces = sorted(provinces.items(), key=lambda item: -item[1])[:limit]
+
+    ret = ""
+    index = 0
+    for (province, value) in sorted_provinces:
+        index += 1
+        ret += "{}. {}: {}\n".format(index, province, value)
+    return ret 
