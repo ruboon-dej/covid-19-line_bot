@@ -18,7 +18,7 @@ FIRST_PROMPT = TextSendMessage(text="Please select the information that you want
     ]))
 
 VALID_FIRST_CHOICE = ["overall", "provinces"]
-OVERALL_THINGS = ["Confirmed","Recovered","Hospitalized","Deaths","NewConfirmed","NewRecovered","NewHospitalized","NewDeaths"]
+OVERALL_THINGS = ["Confirmed","Recovered","Hospitalized","Deaths","NewConfirmed","NewRecovered","NewHospitalized","NewDeaths","UpdateDate"]
 
 class User:
     def __init__(self):
@@ -40,7 +40,11 @@ class User:
     def get_province_result(self, text):
         self.reset()
         result = get_case_for_province(text)
-        return TextSendMessage(text="Number of cases: {}".format(result))
+        x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
+        y = x.json()["LastData"]
+        z = "Last provinces update is : " + str(y)
+        yo = "Number of cases: {}".format(result) + z
+        return TextSendMessage(text=yo)
 
     def handle_when(self):
         x = requests.get('https://covid19.th-stat.com/api/open/today')
