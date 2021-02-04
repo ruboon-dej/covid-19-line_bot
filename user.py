@@ -3,8 +3,6 @@ from linebot.models import (
 )
 from bs4 import BeautifulSoup
 
-from main import get_world_data
-
 from province import get_provinces, PROVINCES, get_case_for_province, get_top_10
 import requests
 
