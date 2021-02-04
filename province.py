@@ -22,5 +22,6 @@ def get_top_10(limit=10):
     index = 0
     for (province, value) in sorted_provinces:
         index += 1
-        ret += "{}. {}: {}\n".format(index, province, value)
+        end = "cases"
+        ret += "{}. {}: {} {}\n".format(index, province, value, end)
     return ret[:-1] 
