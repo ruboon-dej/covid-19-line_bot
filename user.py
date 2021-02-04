@@ -43,7 +43,7 @@ class User:
         x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
         y = x.json()["LastData"]
         z = "Last provinces update is : " + str(y)
-        yo = "Number of cases: {}".format(result) + z
+        yo = "Number of cases: {}".format(result) + "\n" + z
         return TextSendMessage(text=yo)
 
     def handle_when(self):
