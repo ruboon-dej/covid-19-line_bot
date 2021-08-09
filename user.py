@@ -29,7 +29,7 @@ class User:
         self.page = 0
     
     def handle_overall(self):
-        x = requests.get('https://covid19.th-stat.com/api/open/today')
+        x = requests.get('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json')
         y = ""
         for info in OVERALL_THINGS:
             y += "{}: {}\n".format(info, x.json()[info])
@@ -45,7 +45,7 @@ class User:
         return TextSendMessage(text=yo)
 
     def handle_when(self):
-        x = requests.get('https://covid19.th-stat.com/api/open/today')
+        x = requests.get('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json')
         y = x.json()["UpdateDate"]
         z = "Last overall update is : " + str(y)
         return TextSendMessage(text=z) 
