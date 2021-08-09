@@ -85,8 +85,7 @@ class User:
             if text == "overall":
                 return self.handle_overall()
             elif text == "provinces":
-                self.first_choice = text
-                return self.handle_province(text)
+                return TextSendMessage(text="NO!")
             elif text == "I am scared":
                 return TextSendMessage(text="Don't be bro ;-)")
             elif text == "When":
