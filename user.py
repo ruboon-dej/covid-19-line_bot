@@ -16,7 +16,7 @@ FIRST_PROMPT = TextSendMessage(text="Please select the information that you want
     ]))
 
 VALID_FIRST_CHOICE = ["overall", "provinces"]
-OVERALL_THINGS = ["new_case","new_recovered","new_death","total_case","total_recovered","total_death","UpdateDate"]
+OVERALL_THINGS = ["new_case","new_recovered","new_death","total_case","total_recovered","total_death","update_date"]
 
 class User:
     def __init__(self):
