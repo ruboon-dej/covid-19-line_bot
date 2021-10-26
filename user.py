@@ -16,7 +16,7 @@ FIRST_PROMPT = TextSendMessage(text="Please select the information that you want
     ]))
 
 VALID_FIRST_CHOICE = ["overall", "provinces"]
-OVERALL_THINGS = ["Confirmed","Recovered","Hospitalized","Deaths","NewConfirmed","NewRecovered","NewHospitalized","NewDeaths","UpdateDate"]
+OVERALL_THINGS = ["new_case","new_recovered","new_death","total_case","total_recovered","total_death","UpdateDate"]
 
 class User:
     def __init__(self):
@@ -29,30 +29,33 @@ class User:
         self.page = 0
     
     def handle_overall(self):
-        x = requests.get('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json')
+        x = requests.get('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all')
         y = ""
         for info in OVERALL_THINGS:
-            y += "{}: {}\n".format(info, x.json()[info])
+            y += "{}: {}\n".format(info, x.json()[0][info])
         return TextSendMessage(text=y[:-1])
 
     def get_province_result(self, text):
         self.reset()
         result = get_case_for_province(text)
         x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
-        y = x.json()["LastData"]
+        y = x.json()
+        y = y[0]
+        y = y["new_case"]
         z = "Last provinces update is : " + str(y)
         yo = "Number of cases: {}".format(result) + "\n" + z
         return TextSendMessage(text=yo)
 
     def handle_when(self):
-        x = requests.get('https://covid19.th-stat.com/json/covid19v2/getTodayCases.json')
-        y = x.json()["UpdateDate"]
+        x = requests.get('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all')
+        y = x.json()[0]["txn_date"]
         z = "Last overall update is : " + str(y)
         return TextSendMessage(text=z) 
 
     def handle_whenp(self):
-        x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
-        y = x.json()["LastData"]
+        x = requests.get('https://covid19.ddc.moph.go.th/api/Cases/today-cases-by-provinces')
+        x = x.json()[0]
+        y = ["txn_date"]
         z = "Last provinces update is : " + str(y)
         return TextSendMessage(text=z)
 
