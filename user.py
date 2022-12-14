@@ -38,7 +38,7 @@ class User:
     def get_province_result(self, text):
         self.reset()
         result = get_case_for_province(text)
-        x = requests.get('https://covid19.th-stat.com/api/open/cases/sum')
+        x = requests.get('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all')
         y = x.json()
         y = y[0]
         y = y["new_case"]
